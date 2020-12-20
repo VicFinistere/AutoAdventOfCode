@@ -16,6 +16,9 @@ tmp_file="adventOfCode"$day".tmp"
 # File
 file="adventOfCode"$day".txt"
 
+# HTML File
+html_file="adventOfCode"$day".html"
+
 # Page
 wget $url -q -O - > $tmp_file
 
@@ -23,13 +26,13 @@ wget $url -q -O - > $tmp_file
 egrep "\<article\>" -A100 $tmp_file > $file
 
 # Remove everything after the end of article
-sed '1,/<\/article>/!d' $file > $tmp_file
+sed '1,/<\/article>/!d' $file > $html_file
 
+# Use the content of the html file to store the file
+cat $html_file > $file 
 
-# Use the content of the tmp file to store the file
-cat $tmp_file > $file
+# Read the HTML file
+explorer $html_file
 
-# Open the file
-explorer $file
 
 
