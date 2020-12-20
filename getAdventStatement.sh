@@ -19,8 +19,17 @@ file="adventOfCode"$day".txt"
 # Page
 wget $url -q -O - > $tmp_file
 
-# Check file
+# Get the beginning of the article and 100 lines after
 egrep "\<article\>" -A100 $tmp_file > $file
 
+# Remove everything after the end of article
+sed '1,/<\/article>/!d' $file > $tmp_file
+
+
+# Use the content of the tmp file to store the file
+cat $tmp_file > $file
+
+# Open the file
 explorer $file
+
 
